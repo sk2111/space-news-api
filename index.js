@@ -13,9 +13,7 @@ const createDOMNode = (tagName, content, attribute = []) => {
         elem.innerText = content;
     }
     if (Array.isArray(attribute)) {
-        attribute.forEach(({ name, value }) => {
-            elem.setAttribute(name, value);
-        });
+        attribute.forEach(({ name, value }) => elem.setAttribute(name, value));
     }
     return elem;
 };
@@ -37,11 +35,7 @@ const getCardTemplate = ({ imageUrl, title, summary, url }) => {
         const response = await fetch(SPACE_NEWS_API_URL, REQUEST_INIT);
         const newsList = await response.json();
         cardContentRef.innerText = ''; //clear loading text
-        newsList.forEach((newsItem) => {
-            if (newsItem.imageUrl) {
-                cardContentRef.append(getCardTemplate(newsItem));
-            }
-        });
+        newsList.forEach((newsItem) => cardContentRef.append(getCardTemplate(newsItem)));
     }
     catch (e) {
         console.log(e);
